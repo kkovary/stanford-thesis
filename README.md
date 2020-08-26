@@ -5,8 +5,6 @@
 ## Preview
 [View the latest PDF](https://github.com/kkovary/stanford-thesis/blob/master/stanford_thesis.pdf) or click on the image below.
 
-[![Thesis preview](preview.png)](https://github.com/kkovary/stanford-thesis/blob/master/stanford_thesis.pdf)
-
 ## About
 The hope is that this example thesis saves you time that I and countless others before me spent on the minutiae of writing a thesis in LaTeX. It combines a slightly modified version (more on this below) of the existing [Stanford thesis style](https://www.stanford.edu/dept/sul2/etdhelpupload/0/06/Suthesis-2e.sty) ([more Stanford information here](https://library.stanford.edu/research/bibliography-management/latex-bibtex-and-overleaf)) with a template for including figures, tables, inline references, equations, symbols, a bibliography, a signature page, etc...
 I used this style as the basis for my (officially completed) thesis and thus believe it adheres to Stanford's policies, but I make no guarantees.
