@@ -16,8 +16,27 @@
 \usepackage{tabularx}  % nice single page tables
 \usepackage{longtable}  % tables spanning multiple pages
 \usepackage{hyperref}  % URLs
+\usepackage{filecontents}
+\usepackage{natbib}
+\usepackage{bibentry}
+\nobibliography*
 \usepackage[autostyle, english = american]{csquotes}  % quote orientation
 \MakeOuterQuote{"}
+
+% Fig legend formatting
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\usepackage[font=scriptsize,labelfont=bf,margin=\parindent,tableposition=top]{caption}
+\usepackage{blindtext}
+
+% Sup figure formatting
+\newcommand{\beginsupplement}{%
+        \setcounter{table}{0}
+        \renewcommand{\thetable}{S\arabic{table}}%
+        \setcounter{figure}{0}
+        \renewcommand{\thefigure}{S\arabic{figure}}%
+     }
 
 % use png first, otherwise pdf
 % (useful for faster compile times, for final submission switch order)
