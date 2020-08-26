@@ -1,4 +1,4 @@
-# Stanford LaTeX Thesis Example
+# Stanford Thesis
 
 [![Build Status](https://travis-ci.org/dcroote/stanford-thesis-example.svg?branch=master)](https://travis-ci.org/dcroote/stanford-thesis-example)
 
