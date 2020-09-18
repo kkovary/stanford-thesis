@@ -35,7 +35,7 @@
         \setcounter{table}{0}
         \renewcommand{\thetable}{S\arabic{table}}%
         \setcounter{figure}{0}
-        \renewcommand{\thefigure}{S\arabic{figure}}%
+        \renewcommand{\thefigure}{S.\thechapter.\arabic{figure}}%
      }
 
 % use png first, otherwise pdf
@@ -57,11 +57,15 @@
 
 % including chapters, no .tex extension necessary
 \beforepreface
-\include{preface_abstract}
+%\include{preface_abstract}
 \include{preface_acknowledgements}
 \afterpreface
 \include{ch_intro}
 \include{ch_paper1}
+
+\renewcommand\thefigure{\thechapter.\arabic{figure}}    
+\setcounter{figure}{0}  
+
 \include{ch_paper2}
 % \include{ch_conclusion}
 
