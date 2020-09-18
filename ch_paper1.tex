@@ -117,9 +117,6 @@ In conclusion, our study employed sensitive single‐cell mass spectrometry and 
 
 \section{Materials and Methods} \label{Materials and Methods}
 
-\subsection{Reagents and tools table}
-Insert table
-
 \subsection{\emph{Xenopus laevis} egg collection and activation}
 
 \emph{Xenopus} egg extracts were prepared based on modifications of a previous protocol \cite{Tsai2014}. All of the animal protocols used in this manuscript were approved by the Stanford University Administrative Panel on Laboratory Animal Care. To induce egg laying, female \emph{Xenopus laevis} were injected with human chorionic gonadotropin injection the night before each experiment. To collect the eggs, the frogs were subjected to pelvic massage, and the eggs were collected in 1x Marc's Modified Ringer's (MMR) buffer (0.1 M NaCl, 2 mM KCl, 1 mM MgCl2, 2 mM CaCl2, 5 mM HEPES, pH 7.8). To remove the jelly coat from the eggs, they were placed in a solution of 2\% cysteine in 1x MMR buffer for 4 min and gently agitated, after which they were washed four times with 1x MMR buffer. To activate the cell cycle, eggs were placed in a solution of 0.5 $\mu g/ml$ of calcium ionophore A23187 (Sigma) and 1x MMR buffer for 3 min, after which they were washed four times with 1x MMR buffer. Single eggs were collected at their respective time-points and placed into 600 $\mu l$ tubes and snap frozen in liquid nitrogen before being stored at $-80$\si{\degree}C.
@@ -168,10 +165,103 @@ Cell segmentation and tracking were performed using the “MACKtrack” package 
 
 Four‐channel fluorescence images were taken with a 10X objective on a MicroXL microscope, and image analysis was performed using MATLAB analysis. Background subtraction was used in the Hoechst (to stain DNA and mask the nucleus), the two immunofluorescence, and the protein mass fluorescence channels. Signal intensities were corrected for non‐uniformity but were still restricted to a central R = 350 pixel region of 2x2 binned images (1,080 x 1,080 pixels) of the image to minimize potential spatial non‐uniformities in illumination and light collection toward the corners. The Hoechst stain was used to establish a nuclear mask and to select cells in the 2N G0/G1 state based on the integrated DNA stain. The Hoechst intensity levels used to define cells in the 2N state were selected by inspection of the Hoechst histograms. The live‐cell FRET measurements of nuclear ERK activity were performed on a Nikon Ti2 controlled by 3i software (Intelligent Imaging, Denver, CO). The mean nuclear intensities of the FRET and CFP channels were ratioed for each cell to obtain the normalized FRET value at each time-point. At the end of the time-courses, the cells were fixed and stained with either an ERK or MEK antibody, as well an Alexa 647 NHS Ester as an estimate of cell volume. To obtain ERK and MEK concentrations for each cell, the mean total cell intensities of the ERK and MEK antibodies were ratioed over the mean total cell intensity of the Alexa 647 NHS Ester. The final ERK and MEK concentrations for each cell were then matched to the corresponding FRET time-course for that particular cell.
 
-\subsection{Modeling for figures 1A and 1B}
+\subsection{Modeling for Figures 1A and 1B}
 
-\section{Main Figures}
+The goal of these figure panels is to illustrate how different amounts of noise (cell‐to‐cell variation) would affect the output of a multi‐step linear signaling system. We used MATLAB simulations to apply expression variation in the concentrations of pathway components in a five‐step linear signaling pathway with a single input and output, representing a typical vertebrate signaling pathway. The model is not saturated and uses a single fold‐input R to increase pathway activation linearly above the basal activity level. The last regulated signaling step y5 is shown as the analog output $A^*$. We simulated protein expression variation of each of the 10 signaling pathway components using lognormal Monte Carlo noise simulations (each of the 10 system parameters was multiplied by randomly variable factors centered on 1). We followed the system over time using the ODE45 function until it reached equilibrium at t = 15.
 
+\begin{equation}\label{paper1_eq1}
+\frac{dy_1^*}{dt} = \epsilon_1 * R * y_1 - \epsilon_2 * y_1^*
+\end{equation}
+
+\begin{equation}\label{paper1_eq2}
+\frac{dy_2^*}{dt} = \epsilon_3 * y_1^* * y_2 - \epsilon_4 * y_2^*
+\end{equation}
+
+\begin{equation}\label{paper1_eq3}
+\frac{dy_3^*}{dt} = \epsilon_5 * y_2^* * y_3 - \epsilon_6 * y_3^*
+\end{equation}
+
+\begin{equation}\label{paper1_eq4}
+\frac{dy_4^*}{dt} = \epsilon_7 * y_3^* * y_4 - \epsilon_8 * y_4^*
+\end{equation}
+
+\begin{equation}\label{paper1_eq5}
+\frac{dA^*}{dt} = \epsilon_9 * y_4^* * A - \epsilon_10 * A^*
+\end{equation}
+
+
+R is the Receptor Input into the cell that activates $y_1$.
+
+$A^*$ corresponds to $y_5^*$ and denotes the final output signal (i.e., final Signaling Response of the cell). Each signaling step acts linearly on the next intermediate step.
+
+The model is not saturated. For each step, we assume that the active $y^*$ states are generated from a relatively larger constant pool of precursor cells. In other words, $y_i$, as well as A, denotes a pool of inactive precursors that is not significantly diminished during signal transmission ($y_i$ is approx. equal to $y_i$, total and A is approx. equal to Atotal) and is set equal to 1.
+
+To introduce uncorrelated lognormal noise into the system:
+\begin{equation}\label{paper1_eq6}
+\epsilon_i = e^{randn*CV}
+\end{equation}
+
+For i = 1–10, randn is a lognormally distributed random number and CV is the percent noise in the system, typically from 5 to 25\%. We are introducing noise into the system as lognormal since we are assuming that the noise sources are multiplicative not additive in the system (i.e., work to change the enzyme rates) which is a reasonable assumption in biology.
+
+For $|x| << 1, ex \approx 1 + x$, which keeps the CV of the real distribution approximately the same as the CV of the lognormal distribution.
+
+The ten lognormal stochastic values of a factorial parameter $e(1‐10)$ are calculated for each of typically 5,000 runs to generate the plots, $e(i:10)=(exp(randn(10,1), Var)$ in MATLAB. Var is the percent variation parameter that changes in different panels in the plots. Calculating a coefficient of variation (CV) of the resulting random parameter distribution returns the value Var.
+
+\subsection{Modeling for Figures 1C and 1D}
+
+This figure illustrates how the fold‐Input Detection Limit (fIDL) is calculated for a particular noise level (CV) and Receptor Input. We assume there are N independent pathway components which increases the overall noise in the output by noise propagation to:
+
+\begin{equation}\label{paper1_eq7}
+CV_total = CV * \sqrt{N}
+\end{equation}
+
+The calculation of fIDL was done analytically using the inverse normal distribution function in MATLAB to determine the fraction of cells in a population that are in the desired tail region of the output probability distribution. The resulting value is half of the required signal output amplitude since both the unstimulated and stimulated distributions are symmetrical when they are plotted as a log scaled distribution. The factor 2 in the equation reflects that basal and stimulated output distributions are assumed to have the same noise (see Fig 1C, black and green distributions). When assuming 95\% accuracy for distinguishing stimulated and unstimulated cells from the output signal, and assuming N independent components in the system, the resulting fold‐Input Detection Limit is calculated as:
+
+\begin{equation}\label{paper1_eq8}
+fIDL = exp^{2 * norminv(0.95) * CV * \sqrt{N}} = exp^{\alpha * CV * \sqrt{N}} ; \alpha \approx 3.3
+\end{equation}
+
+\subsection{Modeling for Figure 1E}
+
+We also compared uncorrelated variation versus correlated variation (covariation) between signaling components in the pathway. In Fig 1E, we made the assumption that the five positive elements and the five negative elements in the model (possibly reflecting protein kinases versus protein phosphatases) each have a correlated variation. We compare this to the case were all variations are independent of each other as we also do in all other figure panels. This correlated variation leads to an increase of the overall variation of the signaling response of a cell.
+
+The model is the same as shown in Fig 1A and B and Equations 1-5, except that lognormal noise is added into the system as follows:
+
+\begin{equation}\label{paper1_eq9}
+\epsilon_1 = \epsilon_3 = \epsilon_5 = \epsilon_7 = \epsilon_9
+\end{equation}
+
+\begin{equation}\label{paper1_eq10}
+\epsilon_2 = \epsilon_4 = \epsilon_6 = \epsilon_8 = \epsilon_10
+\end{equation}
+
+\subsection{Modeling for Figures 5A-5D}
+
+The goal of these figures is to show how variation and covariation of proteins in a pathway contribute to the control of binary, population‐based signaling responses. We simulated binary pathways in Fig 5 by using the model from in Fig 1 and adding an assumption that cells trigger a binary switch when the output $y_5^*$ exceeds a threshold level of 10, and cells do not trigger the switch when the final output remains below this threshold level. The threshold of 10 was chosen arbitrarily (the results presented are largely independent of the value of this threshold). We used increasing fold‐stimuli strength R and analyzed in the simulations the increasing fraction of cells that triggers the switch. Figure 5B plots the percent of “activated cells” (i.e., the fraction of cells out of all simulations that resulted in an output level > 10) versus the strength of input stimulus R. The solid lines show best fit using a Hill equation. The resulting best fit Hill coefficients are shown in the bar plot in Fig 5C.
+
+Similar to the calculation of a $fIDL$ in Fig  1C and D, we noticed in our simulations that one can describe these Hill plots by an “apparent Hill coefficient” ($aHC$) that is over a broad range of thresholds largely independent of the threshold value used as long as the threshold is larger than the total noise of the system:
+
+\begin{equation}\label{paper1_eq11}
+aHC = \frac{\beta}{CV * \sqrt{N}} ; \beta \approx 1.4
+\end{equation}
+
+\subsection{Modeling for Figures 6A-6C}
+
+The goal of this figure is to show how covariation of MEK/ERK abundance improves the sharpness of the binary population‐level outcome. For numerical simulations, we used the ODE model of the ERK signaling network from \cite{Sturm2010} with negative feedback intact. The model incorporates dynamics from RasGTP through Raf and MEK down to ERK phosphorylation. We used the input concentration of RasGTP as a proxy for extracellular EGF. The output was defined as doubly phosphorylated ERK (pERK), which serves as a proxy for ERK activity, as ERK activity is a monotonically increasing function with respect to pERK.
+
+\subsection{Modeling for Figure 8}
+
+The goal of this figure is to illustrate the conflicting effects that expression variation, covariation, and number of pathway components have on controlling analog single‐cell and binary population‐level signaling responses. The equations for fIDL and aHC were presented earlier (Equations \ref{paper1_eq8} \ref{paper1_eq11}). We are now also combining these two curves by multiplying the logarithm of $fIDL$ with $aHC$ to show their co‐dependency. The shown combined error is derived from an error propagation analysis for correlated and uncorrelated variation of pathway components:
+
+\begin{equation}\label{paper1_eq12}
+log_2(fIDL) * aHC \approx 6.3
+\end{equation}
+
+\subsection{Modeling for Supplemental Figure 1}
+
+Supplemental figure 1 \ref{fig:paper1_figS1} compares $fIDL$ values to the log2 mutual information content of the same system (bits), adding different levels of saturation to the last term of the equation (as an example, we used instead of y(4) the term $10*y(4)/(y(4)+9)$ for the system that imposes a saturation of a factor of 10 to the output signal). For the mutual information calculations, 10,000 simulations were made with R values spread out using a random number generator in log2 units. Output A* (log2 units) were simulated, and the mutual information was derived from R and $A^*$ by using log2 in the MI equation and by using binning of 0.05 for R and $A^*$.
+
+\section{Figures}
 % Figure 1
 \begin{figure}[hbt!]
 \centering
@@ -296,8 +386,10 @@ Four‐channel fluorescence images were taken with a 10X objective on a MicroXL 
 \end{figure}
 
 % Supplemental Figures
-\section{Supplemental Figures}
+
 \beginsupplement
+
+%\section{Supplemental Figures}
 
 % Figure S1
 \begin{figure}[hbt!]
@@ -366,19 +458,3 @@ Four‐channel fluorescence images were taken with a 10X objective on a MicroXL 
 \end{figure}
 
 
-\renewcommand{\arraystretch}{2}  % make spacing nicer
-\begin{table}[hbt!]
-\centering
-\begin{tabularx}{\textwidth}{c|c|c|c}  % 4 columns center-justified
-   \textbf{Col 1} & \textbf{Col 2} & \textbf{Col 3} & \textbf{Col 4} \\
-   \hline  % horizontal line
-   Text in Row 1a & Text in Row 1b & Text in Row 1c & Lots of text in Row 1d \\
-                  & Row 1.5b & Row 1.5c & Row 1.5d \\
-   \hline
-   Row 2a & Row 2b & Row 2c & Row 2d \\
-   \hline
-   Row 3a & Row 3b & Row 3c & Row 3d \\
-\end{tabularx}
-\caption[Short table caption for List of Tables]{Long table caption explaining everything.}
-\label{tab:paper1_tab1}
-\end{table}

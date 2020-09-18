@@ -24,7 +24,7 @@ Protein expression variation leads to phenotypic variance between cells which, f
 \begin{itemize}
 \item Carried out large-scale analysis of variation and correlation of protein expression in single cells
 \item Found that metabolic pathways tend to have low variation and high co-variation of protein expression, which would allow cells to express proteins at their ideal stochiometric levels that would maximize pathway efficiency.
-\item •	Strategy of correlated expression of proteins extends beyond just individual modules and functionally related modules have higher than expected correlations.
+\item Strategy of correlated expression of proteins extends beyond just individual modules and functionally related modules have higher than expected correlations.
 \end{itemize}
 
 \section{Introduction}
@@ -86,3 +86,89 @@ The interaction network for the oxidative phosphorylation module is highlighted 
 The relationships between all of these modules can be visually represented as a network graph (Figs. 5E-F). Each of these networks is comprised of several neighborhoods, some with connections between them and others that are isolated. For instance, the positive relationship network contained one neighborhood (Fig. 5 D, orange) that was comprised primarily of protein translation machinery and mitochondrial modules, suggesting that there is a strong positive relationship between ribosomal protein expression and mitochondria at this stage of development. This neighborhood is closely related to a second (Fig. 5D, green) that contained oxidative phosphorylation modules that were tightly linked with various metabolic pathways including lipid metabolism and amino acid degradation pathways.  
 
 The negative relationship network provides additional strength to the previous insights based on the positive relationship network (Fig. 5E). Here we see negative correlations between oxidative phosphorylation and carbohydrate metabolic processes. As stated earlier, much of carbohydrate metabolism is focused on production of NADPH through the pentose phosphate pathway rather than on the production of ATP through oxidative phosphorylation in the mitochondria. This provides further evidence that measuring correlation of protein expression in single cells can elucidate metabolic strategies of cells.
+
+\section{Materials and Methods} \label{Materials and Methods}
+
+\subsection{Collection and activation of \emph{Xenopus laevis} eggs.}
+
+All of the animal protocols used in this manuscript were approved by the Stanford University Administrative Panel on Laboratory Animal Care. Xenopus egg extracts were prepared as previously described (Kovary et al., 2018), Briefly, to induce egg laying, female Xenopus laevis were injected with human chorionic gonadotropin injection the night before each experiment. To collect the eggs, the frogs were subjected to pelvic massage, and the eggs were collected in 1X Marc’s Modified Ringer’s (MMR) buffer (0.1 M NaCl, 2 mM KCl, 1 mM MgCl2, 2 mM CaCl2, 5 mM HEPES, pH 7.8). To remove the jelly coat from the eggs, they were placed in a solution of 2\% cysteine in 1× MMR buffer for 4 min and gently agitated, after which they were washed four times with 1× MMR buffer. To activate the cell cycle, eggs were placed in a solution of 0.5 μg/ml of calcium ionophore A23187 (Sigma) and 1X MMR buffer for 3 min, after which they were washed four times with 1× MMR buffer. Single eggs were collected at their respective time-points and placed into 600$\mu l$ tubes and snap frozen in liquid nitrogen before being stored at $-80$\si{\degree}C.
+
+\subsection{Sample preparation for mass spectrometry}
+
+Single eggs were lysed mechanically by pipetting the egg in 100$\mu l$ of lysis buffer (100 mM NaCl, 25 mM Tris pH 8.2, Complete EDTA-free protease inhibitor cocktail (Sigma). The lysate was then placed in a 400$\mu l$ natural polyethylene micro-centrifuge tube (E&K Scientific #485050) and spun at 15,000 g in a right-angle centrifuge (Beckman Microfuge E) at $4$\si{\degree}C for 5 min. The lipid layer was removed by using a razor blade to cut the tube off just beneath it, and the cytoplasmic fraction was pipetted into a 1.5-ml protein LoBind tube (Fisher Scientific 13-698-794), being careful to leave the yolk behind. To precipitate the proteins from the cytoplasmic fraction, 1 ml of ice-cold acetone was added to each sample and placed at $-20$\si{\degree}C overnight. To collect precipitated proteins, the samples were centrifuged at 18,000 g for 20 min at $4$\si{\degree}C. Acetone was decanted, and the protein pellets were resolubilized in 25$\mu l$ of 8 M urea. To fully solubilize the protein pellet, the samples were placed in a shaker for 1 h at room temperature. The samples were then diluted to 2 M urea with 50 mM ammonium bicarbonate to a 100μL volume, after which protein concentration was measured in duplicate with a BCA assay by taking two 10μL aliquots of each sample. The proteins in the remaining 80μL of sample volume were reduced with 10 mM TCEP and incubated for 30 min at $37$\si{\degree}C, then alkylated with 15 mM iodoacetamide and incubated in the dark at room temperature.
+
+Next, the samples were diluted to 1 M urea with 50 mM ammonium bicarbonate. Trypsin (Promega #V5113) was then added at a ratio of 10ng trypsin per 1ug protein (no < 500 ng was added to a sample). The trypsin digestion was carried out at $37$\si{\degree}C for 12–16 h. To stop the trypsin, formic acid (Fisher A117-50) was added at a ratio of 3μl per 100μl of sample to bring the pH down to < 3.
+
+Peptides were cleaned up using an Oasis HLB uElution plate (Waters), equilibrated, and washed with 0.04\% trifluoroacetic acid in water, and eluted in 80\% acetonitrile with 0.2\% formic acid. All solutions used are HPLC grade. Samples were then lyophilized. To remove any variance produced by phosphorylated peptides, the samples were phosphatase-treated. Peptides were resolubilized in 50$\mu l$ of 1X NEBuffer 3 (no BSA), and calf intestinal alkaline phosphatase (NEB M0290S) was added at a ratio 0.25 units per lg of peptide and incubated for 1 h at $37$\si{\degree}C. The peptides were cleaned up again according to steps described above.
+Samples were then labeled with 6-plex Thermo Scientific Tandem Mass Tag (TMT) Reagents, using instructions provided by the manufacturer. The 25 samples were divided into 5 groups of 5 and pooled together with a master reference sample to create 6-plexed samples. Peptides cleaned up and resolubilized in 2\% acetonitrile and 0.1\% formic acid before MS analysis.
+
+\subsection{Mass spectrometry data collection and analysis}
+
+Peptide identification of each digestion mixture was performed by microcapillary reverse-phase HPLC nanoelectrospray tandem mass spectrometry (mLC-MS/MS) on an LTQ-Orbitrap Velos. The Orbitrap repetitively surveyed a mass/charge (m/z) range from 395 to 1,600, while data-dependent MS/MS spectra on the 20 most abundant ions in each survey scan were acquired in the linear ion trap. MS/MS spectra were acquired with a relative collision energy of 30\%, an isolation width of 2.5 Da and dynamic exclusion of recurring ions for 60 s. Preliminary sequencing of peptides was facilitated with the SEQUEST algorithm with a mass tolerance of 30 ppm against a species-specific (mouse or human) subset of the UniProt Knowledgebase. With a custom version of the Harvard Proteomics Browser Suite (Thermo Fisher Scientific), peptide spectrum matches (PSMs) were accepted with mass error <2.5 ppm and score thresholds to attain an estimated false discovery rate (FDR) of <1\% using a reverse-decoy database strategy.
+
+\subsection{Data processing}
+
+To minimize the effects of non-biological variance, a correction factor was used to correct for these biases. First, each peptide in each run was normalized its corresponding master reference channel (equal parts of all 25 eggs) after which peptides were grouped by their master Uniprot accession number and the average normalized intensity was calculate to represent the relative protein abundance. Proteins were then re-normalized by the mean protein value across all cells and then by the mean protein value within each cell. Missing protein levels were imputed using the k-nearest neighbors algorithm, with k being set to 3 and the similarity measure for distance the Gower’s distance between the proteome vectors.
+
+\subsection{Statistical analysis of proteins}
+
+To estimate the variability of expression of each protein between single cells, we calculated the coefficient of variance (CV), a unitless metric defined as the standard deviation divided by the arithmetic mean. This was done on non-transformed data since CV as defined above is would result in incorrect CVs (Canchola, 2017). To estimate the coordinated expression of each protein measured we calculated the Pearson’s correlation coefficient for each pair of proteins after Log2 transforming them in order to reduce the weight of potential outliers and to balance the influence of values below and above 1.
+
+\subsection{Module analysis}
+
+Proteins were grouped together into modules using GO term and KEGG pathway annotations. GO terms and KEGG pathways along with their associated proteins were retrieved using the R package org.Xl.eg.db (Carlson, 2020). In order to estimate module level variance, the CV values of all of the proteins associated with each module were aggregated and the arithmetic mean was calculated and used to represent module level variance. A similar approach was used to estimating module level coordinated expression. The arithmetic mean was calculated for the lower triangular matrix of the pairwise correlation matrix calculated for all protein pairs associated with each module and was used to represent module level coordinated expression.
+
+In order to identify between module relationships, we considered all pairwise combinations of modules with zero overlapping proteins. To test whether combining the two modules resulted in a higher or lower than expected combined module level coordinated expression we constructed a null hypothesis where all new pairwise relationships between the two modules were assumed to be zero (no relationship). This distribution of correlation coefficients was compared to the true distribution. When the FDR corrected p-value, calculated through a Student’s t-test, was less than 0.05 then the pairwise relationship between the modules was classified as significant. We then measured if the arithmetic mean of the combined distribution of correlation coefficients was higher or lower than the null distribution to classify the relationship as positive or negative.
+
+\subsection{GO-slim analysis}
+
+Modules that had variances less than the population mean and correlations greater than the population mean were submitted to CateGOrizer separately from the rest of the population. The number of GO-terms assigned to each category from CateGOrizer was returned from the analysis. The counts of GO-terms assigned to each category was normalized to the total number of analyzed GO-terms such that all of the categories added up to 100\%.
+
+\subsection{Metabolic Model}
+
+
+\section{Figures}
+% Figure 1
+\begin{figure}[hbt!]
+\centering
+\includegraphics[width=12cm, keepaspectratio]{figs/paper2/fig1.png}
+\caption{Single cell proteomics reveals global protein expression variability and coordinated expression between protein pairs.}
+\caption*{\textbf{(A)} Heatmap of total variation (Equation 1) in relationship to correlation coefficient (x-axis) and variation (y-axis). Orange lines represent specific regions of equal total variance, and blue and red points represent the region where the distributions in (B) come from. \textbf{(B)} Pairwise plot of simulated distributions of proteins of equal variance. Though the protein distributions have the same total variance and similar variance, the correlated expression of the proteins are very different, which can have profound impacts on module function. \textbf{(C)} Ranked plot of the calculated coefficient of variation of each of the proteins quantified in single cells. \textbf{(D)} Heatmap of the correlation coefficients between all measured protein pairs. \textbf{(E)} Pairwise plot of all measured protein variances and covariances, colored by density.}
+\label{fig:paper2_fig1}
+\end{figure}
+
+% Figure 2
+\begin{figure}[hbt!]
+\centering
+\includegraphics[width=15cm, keepaspectratio]{figs/paper2/fig2.png}
+\caption{KEGG pathways and GO Terms can be used to group proteins together to identify modules that on average maintain low and high levels of expression variation.}
+\caption*{\textbf{(A)} Density plots of the proteins assigned to each of the four modules represent the variation of expression. \textbf{(B)} Bar plots the coefficient of variation calculated for each protein. The dashed line represents the median coefficient of variation of all measured proteins. \textbf{(C)} Histogram of the average module variance of all modules analyzed in this dataset (1112). The module variance of each of the modules shown in A and B are colored below the plot.}
+\label{fig:paper2_fig2}
+\end{figure}
+
+% Figure 3
+\begin{figure}[hbt!]
+\centering
+\includegraphics[width=15cm, keepaspectratio]{figs/paper2/fig3.png}
+\caption{KEGG pathways and GO Terms can be used to group proteins together to identify modules that on average maintain low and high levels of coordinated expression.}
+\caption*{\textbf{(A)} Heat maps of the pairwise correlations between the proteins shown in modules from figure 2. \textbf{(B)} Bar plot of the average of the lower triangular matrix of the module protein expression correlation (module coordinated expression). Dashed line represents the average module coordinated expression of all measured modules in this dataset (1112). \textbf{(C)} Histogram of the average module coordinated expression of all modules analyzed in this dataset (1112). Modules shown in A and B are color coded below the plot.}
+\label{fig:paper2_fig3}
+\end{figure}
+
+% Figure 4
+\begin{figure}[hbt!]
+\centering
+\includegraphics[width=15cm, keepaspectratio]{figs/paper2/fig4.png}
+\caption{Metabolic pathways utilize low variance and high correlation of protein expression to increase efficiency.}
+\caption*{\textbf{(A)} Pairwise plot between module correlation and module variance. Dashed lines represent the average value of the populations. The low variance and high correlated modules are colored blue. \textbf{(B)} Bar plot of normalized cateGOrizer analysis. The low variance high correlation modules (blue) are compared to the rest of the population (grey). \textbf{(C)} Graphical representation of the metabolic module used to test the effects of variance and correlation on efficiency. The enzymes (E1 and E2) metabolize the substrate (A) into the product (C) via an intermediate molecule (B). This pathway (green) competes for the intermediate with an alternative pathway (X, yellow) for the intermediate molecule. \textbf{(D)} Pairwise plots of enzyme concentrations that were sampled from varying distributions of variance and correlation (1000 cells). \textbf{(E)} Line plot showing the pathway efficiency (y-axis) for varying levels of correlation (x-axis) and variance (color gradient). Points on the graph represent the mean and error bars represent the standard error of the mean.}
+\label{fig:paper2_fig4}
+\end{figure}
+
+% Figure 5
+\begin{figure}[hbt!]
+\centering
+\includegraphics[width=11cm, keepaspectratio]{figs/paper2/fig5.png}
+\caption{Bait-prey framework to identify module-module relationships}
+\caption*{\textbf{(A)} Clustered heatmap of correlation coefficients between the mitochondrial protein complex and superoxide dismutase activity modules. \textbf{(B)} Clustered heatmap of correlation coefficients between the mitochondrial protein complex and mitotic nuclear division modules. \textbf{(C)} Illustration of between module null hypothesis. All new interactions (grey) between modules A (blue) and B (purple) are assumed to be zero. \textbf{(D)} Volcano plot of log2 transformed ratio of the observed between module correlation value and the calculated null hypothesis (x-axis) and the -log10 transformed FDR corrected p-value. Significant positive modules are colored orange and significant negative modules are colored blue. \textbf{(E)} Network of significant positive modules. \textbf{(F)} Network of significant negative modules.}
+\label{fig:paper2_fig5}
+\end{figure}
