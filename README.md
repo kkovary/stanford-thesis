@@ -19,8 +19,3 @@ This template adopts a modular structure where each chapter is a separate `.tex`
 3. Read `main.tex` and update it with your information. Add your bibliography, figures, and chapter text. There should be no need to further modify the Stanford style file `suthesis-2e.sty`.
 4. Finish and submit thesis.
 
-## Contributions
-Pull requests are welcome for improvements or additions that will benefit others.
-
-## Testing
-This example thesis is compiled on Travis CI with the `dxjoke/tectonic-docker` docker image.
